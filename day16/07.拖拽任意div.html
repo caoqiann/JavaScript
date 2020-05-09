@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#box01{
+				width: 100px;
+				height: 100px;
+				background-color: palevioletred;
+				position: absolute;
+			}
+			
+			#box02{
+				width: 100px;
+				height: 100px;
+				background-color: sandybrown;
+				position: absolute;
+				left:200px;
+				top: 200px;
+			}
+			
+			#cat{
+				width: 100px;
+				height: 100px;
+				background-color: palevioletred;
+				position: absolute;
+				
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box1 = document.getElementById("box01");
+				var box2 = document.getElementById("box02")
+				var img = document.getElementsByTagName("img");
+				drag(box1);
+				drag(box2);
+				drag(img[0]);
+			}
+				
+				function drag(obj){
+					obj.onmousedown = function(event){
+					//兼容性
+						event = event || window.event;
+						
+						//设置box1捕获所有鼠标按下的事件
+						/*
+						 * setCapture()
+						 * 	只有IE支持,但在火狐中不会报错
+						 * 	在chrome中调用会报错
+						 */
+						
+						/*if(box1.setCapture){
+							box1.setCapture();
+						}*/
+						
+						obj.setCapture && obj.setCapture();
+						
+					//div的偏移量 鼠标.clientX - 元素.offsetLeft
+					//div的偏移量 鼠标.clientY - 元素.offsetTop
+					var ol = event.clientX - obj.offsetLeft;
+					var ot = event.clientY - obj.offsetTop;
+					
+					
+					//为document绑定一个onmousemove事件
+						document.onmousemove = function(event){
+							//兼容性
+							event = event || window.event;
+							
+							var left = event.clientX - ol;
+							var top = event.clientY - ot;
+							obj.style.left = left + "px";
+							obj.style.top = top + "px";
+							
+						}
+						//如果有其他元素覆盖移动元素 此时鼠标在其他元素上
+						//如果把onmouseup绑定给box1 被覆盖时就不会起作用了
+						document.onmouseup = function(){
+							//取消onmoumove事件
+							document.onmousemove = null;
+							//一次性事件  如果不取消 那么整个document都会执行这个函数
+							document.onmouseup = null;
+							//当鼠标松开时,取消对事件的捕获
+							obj.releaseCapture && obj.releaseCapture();
+						}
+						/*
+						 * 当我们拖拽网页中的一个内容时,浏览器会默认去搜索引擎中的内容
+						 * 	此时会导致拖拽功能异常,这个是浏览器提供的默认行为
+						 * 	如果不希望发生这个行为,则可以通过return false来取消默认行为
+						 * 
+						 * 但IE8及以下浏览器不支持
+						 */
+						return false;
+						}
+				}
+			
+		</script>
+	</head>
+	<body>
+		<div id="box01"></div>
+		<div id="box02"></div>
+		<img src="img/img3.jpg" id="cat" />
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+			//获取body标签
+//			var body = document.getElementsByTagName("body")[0];
+			/*
+			 * 在document中有一个属性body,它保存的是body的引用
+			 * 
+			 * document.documentElement保存的是html根标签
+			 * 
+			 * document.all代表页面中的所有元素
+			 * 
+			 * getElementsByClassName()
+			 * 	可以根据class属性获取一组元素节点对象
+			 * 	但是该方法不支持IE8及以下浏览器
+			 */
+			var body = document.body;
+			var html = document.documentElement;
+			
+			//两种方式相同
+			var all = document.all;
+			all = document.getElementsByTagName("*");
+			
+			console.log(body);
+			
+			/*
+			 * document.querySelector()
+			 * 	需要一个选择器的字符串作为参数
+			 * 	可以根据一个CSS选择器来查询一个元素节点对象
+			 * 	IE8支持
+			 * 	使用该方法总会返回唯一的一个元素,如果满足条件的元素有多个,那么它只会返回第一个
+			 * 
+			 * 
+			 * document.querySelectorAll()
+			 * 	该方法与querySelector()用法类似
+			 * 	不同的是它会将符合条件的元素封装到数组中返回
+			 * 	即使符合条件的只有一个元素,它也会返回数组
+			 * 
+			 */
+			var div = document.querySelector(".box1 div");
+			console.log(div.innerHTML);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box1">
+			<div>this is box1</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			/*
+			 * 检查一个字符串中是否含有 .
+			 * . 表示任意字符
+			 * 在正则表达式中使用\作为转义字符
+			 * 用 \. 表示 .
+			 * 用\\ 表示 \
+			 * 
+			 * 注意:使用构造函数时,由于他的参数是一个字符串,而\是字符串中的转义字符
+			 * 	如果要使用\则需要用\\来代替
+			 */
+			var reg = /\./;
+			
+			console.log(reg.test(314));
+			
+			
+			/*
+			 * \w 表示任意字母 数字 下划线  [A-z0-9_]
+			 * \W 表示除了字母 数字 下划线 [^A-z0-9_]
+			 * \d 表示任意数字 [0-9]
+			 * \D 表示除了数字 [^0-9]
+			 * \s 表示空格
+			 * \S 表示除了空格
+			 * \b 表示单词边界
+			 * \B 表示除了单词边界
+			 */
+			
+			//前后都加上单词边界
+			reg = /\bchild\b/;
+			console.log(reg.test("child"));
+			
+			//去除掉字符串中两端的空格
+			//去除空格就是使用""来替换空格
+			
+			var str = "       hello     ";
+			str = str.replace(/\s/g,"");
+			
+			var str2 = "       he  llo     ";
+			
+			
+			//去掉开头的空格
+			//str2 = str2.replace(/^\s*/,""); 
+			
+			//去掉结尾的空格
+			//str2 = str2.replace(/\s*$/,"");
+			
+			//整合两个去除空格的式子
+			str2 = str2.replace(/^\s*|\s*$/g,"");
+			console.log(str2);
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			
+			#outer{
+				width: 350px;
+				margin: 50px auto;
+				text-align: center;
+				background-color:darkseagreen;
+			}
+			button{
+				padding: 10px;
+				background-color: gray;
+				text-align: center;
+			}
+			
+			img{
+				height: 300px;
+				width: 300px;
+				text-align: center;
+			}
+			
+		</style>
+		
+		
+	</head>
+	<body>
+		<div id="outer">
+			<p id="language">There are five pics, this is NO.1 </p>
+			<img src="img/img1.jpg" alt="@" />
+			<button id="perv">上一张</button>
+			<button id="next">下一张</button>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+			
+				var imgArr = ["img/img1.jpg","img/img2.jpg","img/img3.jpg","img/img4.jpg","img/img5.jpg"];
+				var index = 0;
+				var img = document.getElementsByTagName("img")[0];
+				
+				var language = document.getElementById("language");
+				
+				var p = document.getElementById("perv");
+				var n = document.getElementById("next");
+				
+				p.onclick = function(){
+					index--;
+					if(index < 0){
+						index = imgArr.length-1;
+					}
+					img.src = imgArr[index];
+					language.innerHTML = "There are five pics, this is NO."+(index+1);
+				}
+				n.onclick = function(){
+					index++;
+					if(index > imgArr.length-1){
+						index = 0;
+					}
+					
+					img.src = imgArr[index];
+					language.innerHTML = "There are five pics, this is NO."+(index+1);
+				}
+				
+				
+			
+		</script>
+</html>

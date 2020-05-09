@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#outer{
+				width: 320px;
+				height: 300px;
+				margin: 0 auto;
+				background-color: plum;
+				padding:10px 0;
+				position: relative;
+				/*裁剪溢出部分*/
+				overflow: hidden;
+			}
+			#imgList{
+				list-style: none;
+				/*width: 1100px;*/
+				position: absolute;
+				/*
+				 * 每项左移动220px,就会显示下一张图片
+				 */
+				
+			}
+			#imgList li{
+				float: left;
+				margin: 0 10px;
+			}
+			#navDiv{
+				position: absolute;
+				bottom: 15px;
+				/*
+				 * 设置居中
+				 * outer宽320 navDiv宽125
+				 * 两边留出97.5
+				 */
+				/*left:97.5px;*/
+			}
+			#navDiv a{
+				float: left;
+				width: 15px;
+				height: 15px;
+				background-color: #000000;
+				margin:0 5px;
+				/*透明度*/
+				opacity: 0.5;
+				/*兼容IE8透明*/
+				filter: alpha(opacity=50);
+			}
+			/*
+			 * 设置鼠标移入导航标签效果
+			 */
+			#navDiv a:hover{
+				background-color: darkgray;
+			}
+			img{
+				width: 300px;
+				height: 300px;
+			}
+		</style>
+		<!--引入工具-->
+		<script type="text/javascript" src="js/tools.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//设置imgList宽度
+				var imgList = document.getElementById("imgList");
+				var imgArr = document.getElementsByTagName("img");
+				imgList.style.width = imgArr.length * 320 + "px";
+				
+				//设置导航居中
+				var navDiv = document.getElementById("navDiv");
+				var outer = document.getElementById("outer");
+				navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2+"px";
+				
+				//默认显示图片索引
+				var index = 0;
+				//获取所有a
+				var allA = document.getElementsByTagName("a");
+				//设置默认选中效果
+				allA[index].style.background="darkgray";
+				/*
+				 * 点击超链接切换图片
+				 */
+				for(var i= 0; i < allA.length; i++){
+					allA[i].num = i;
+					allA[i].onclick = function(){
+						
+						//点击的时候关闭自动定时器
+						clearInterval(timer);
+						index = this.num;
+						/*
+						 * 第一张 索引0 left0
+						 * 第二张 索引1 left-320
+						 * 第三章 索引2 left-640
+						 */
+						//imgList.style.left = index * (-320) + "px";
+						
+						//修改选中的a
+						setA();
+						move(imgList,"left",-320*index,20,function(){
+							//动画执行完毕 调用回调函数 继续轮播
+							aotuChange();
+						});
+					}
+					
+					
+				}
+					aotuChange();
+					
+				//创建一个方法来设置选中a
+					function setA(){
+						//判断当前索引是否是最后一张图片
+						if(index >= imgArr.length - 1){
+							index = 0;
+							
+							//此时显示最后一张图片,最后一张图片和第一张一样
+							//通过css将最后一张切换成第一张
+							imgList.style.left = 0;
+						}
+						
+						for(var i = 0; i < allA.length; i++){
+							//写成空串 因为页内样式优先级高于内联样式
+							//如果写上颜色就会使内联样式失效
+							allA[i].style.backgroundColor = "";
+						}
+						allA[index].style.backgroundColor = "darkgray";
+					};
+				//自动切换图片
+				var timer;
+				function aotuChange(){
+					
+					timer = setInterval(function(){
+						index++;
+						
+						move(imgList,"left",-320*index,20,function(){
+							setA();
+						});
+					},2000);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!--创建一个外部div,来作为大的容器-->
+		<div id="outer">
+			<ul id="imgList">
+				<li><img src="img/img1.jpg" /></li>
+				<li><img src="img/img2.jpg" /></li>
+				<li><img src="img/img3.jpg" /></li>
+				<li><img src="img/img4.jpg" /></li>
+				<li><img src="img/img5.jpg" /></li>
+				<li><img src="img/img1.jpg" /></li>
+			</ul>
+			<!--创建导航按钮-->
+			<div id="navDiv">
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+			</div>
+		</div>
+	</body>
+</html>

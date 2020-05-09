@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#info{
+				width: 300px;
+				height: 300px;
+				background-color: thistle;
+				/*滚动条*/
+				overflow: auto;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				/*
+				 * 当垂直滚动条到底时表单项可用
+				 * 
+				 * onscroll
+				 * 	该事件会在元素的滚动条滚动时触发
+				 */
+				var info = document.getElementById("info");
+				var inputs = document.getElementsByTagName("input");
+				info.onscroll = function(){
+					if(info.scrollHeight - info.scrollTop == info.clientHeight){
+						//滚动条滚动到底,使表单项可用
+						/*
+						 * disabled属性可以设置一个元素是否禁用
+						 * 	如果设置为true则禁用
+						 * 	如果设置为false则不禁用
+						 */
+						inputs[0].disabled = false;
+						inputs[1].disabled = false;
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<h3>欢迎注册</h3>
+		<p id="info">
+
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+			请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.请仔细阅读协议后在进行注册.
+		</p>
+		<!--如果为表单项添加disabled="disabled" 则表单项将变成不可用状态-->
+		<input type="checkbox" disabled="disabled"/>我已仔细阅读协议
+		<input type="submit" value="注册" disabled="disabled"/>
+	</body>
+</html>

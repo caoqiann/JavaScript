@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.b1{
+				width: 100px;
+				height: 100px;
+				background-color: darksalmon;
+			}
+			.b2{
+				width: 200px;
+				
+				background-color: palegreen;
+			}
+		</style>
+		<script type="text/javascript" src="js/tools.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				/*
+				 * 通过style修改元素样式,每修改一个样式,浏览器就需要重新渲染一次页面
+				 * 	这样执行的性能是比较差的,而且这种形式当我们要修改多个样式时也很不方便
+				 */
+				var btn01 = document.getElementById("btn01");
+				var box = document.getElementById("box");
+				btn01.onclick = function(){
+					/*box.style.width = "200px";
+					box.style.height = "200px";
+					box.style.backgroundColor = "seagreen";*/
+					/*
+					 * 可以通过修改class属性来间接修改样式
+					 * 这样修改一次即可同时修改多个样式
+					 * 此时浏览器只需要渲染一次页面,性能较好
+					 * 并且这种方式可以使表现和行为进一步分离
+					 */
+					//box.className += " b2";
+					//addClass(box,"b2");
+					//removeClass(box,"b2");
+					toggleClass(box,"b2");
+				}
+			}
+				
+		</script>
+	</head>
+	<body>
+		<button id="btn01">Change</button>
+		<br /><br />
+		<div id="box" class="b1">
+			
+		</div>
+	</body>
+</html>

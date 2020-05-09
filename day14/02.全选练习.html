@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				//全选按钮
+				var all = document.getElementById("checkAll");
+				var items = document.getElementsByName("items");
+				all.onclick = function(){
+					
+					
+					for (var i = 0; i < items.length; i++){
+						items[i].checked = true;
+					}
+					checkBox.checked = true;
+				}
+				
+				
+				//全不选按钮
+				var no = document.getElementById("checkNo");
+				no.onclick = function(){
+					for (var i = 0; i < items.length; i++){
+						items[i].checked = false;
+					}
+					checkBox.checked = false;
+				}
+				
+				
+				//反选按钮
+				var rev = document.getElementById("checkRev");
+				rev.onclick = function(){
+					checkBox.checked = true;
+					
+					for (var i = 0; i < items.length; i++){
+						/*if(items[i].checked == true){
+								items[i].checked = false;
+						}else{
+							items[i].checked = true;
+						}*/
+						items[i].checked = !items[i].checked;
+					}	
+					//如果反选选中全部,那么 全选/全不选 则被选中
+						for(var j = 0; j < items.length; j++){
+							if(items[j].checked == false){
+								checkBox.checked = false;
+								break;
+							}
+						}	
+					
+				}
+				//提交按钮
+				var sub = document.getElementById("send");
+				sub.onclick = function(){
+					
+					for(var i = 0; i < items.length; i++){
+						if(items[i].checked == true){
+							alert(items[i].value);							
+						}
+					}
+				}
+				
+				//全选/全不选 多选框
+				var checkBox = document.getElementById("checkAllBox");
+				var count = 0;
+				checkBox.onclick = function(){
+					for(var i = 0; i < items.length; i++){
+						
+						//在事件的响应函数中,响应函数是给谁绑定的 this就是谁
+						
+//						items[i].checked = checkBox.checked;
+						items[i].checked = this.checked;
+					}	
+				}
+				
+				//如果依次选中每一个, 在选中最后一个时,全选/全不选checked == true
+				//在全部选中状态下,取消一个选中,则全选/全不选checked == false
+				for(var i = 0; i < items.length; i++){
+					items[i].onclick = function(){
+						checkBox.checked = true;
+						for(var j = 0; j < items.length; j++){
+							if(items[j].checked == false){
+								checkBox.checked = false;
+								
+								//一旦进入循环  则以及得出结果 不用再继续执行
+								break;
+							}
+							
+						}
+					}
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		
+		<form method="post" action="">
+			<p>What's your favourite sport?</p>
+			<input type="checkbox" id="checkAllBox" />全选/全不选
+			<p>
+			<br />
+			<input type="checkbox" name="items" value="soccer"/>soccer
+			<input type="checkbox" name="items" value="basketball"/>basketball
+			<input type="checkbox" name="items" value="badminton"/>badminton
+			<input type="checkbox" name="items" value="ping-pang"/>ping-pang
+			</p>
+			<br />
+			<input type="button" id="checkAll" value="全选"/>
+			<input type="button" id="checkNo" value="全不选"/>
+			<input type="button" id="checkRev" value="反选"/>
+			<input type="button" id="send" value="提交"/>
+		
+		
+		</form>
+	</body>
+</html>

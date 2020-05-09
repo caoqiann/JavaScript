@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			img{
+				height: 200px;
+				width: 200px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				/*
+				 * 使图片自动切换
+				 */
+				var img1 = document.getElementById("img1");
+				var imgArr = ["img/img1.jpg","img/img2.jpg","img/img3.jpg","img/img4.jpg","img/img5.jpg"];
+				var index = 0;
+				var btn1 = document.getElementById("btn1");
+				var btn2 = document.getElementById("btn2");
+				var timer;
+				btn1.onclick = function(){
+						/*
+						 * 每点击依次按钮,就会开启一个定时器
+						 * 	点击多次就会开启多个计时器,这就导致图片切换速度过快
+						 * 	并且我们只能关闭最后一次开启的定时器
+						 * 
+						 * 在开启下一个定时器之前 先把当前元素上的其他定时器关闭
+						 */
+						clearInterval(timer);
+					 	timer = setInterval(function(){
+						index++;
+						index %= imgArr.length;
+						img1.src = imgArr[index];
+						/*if(index >= imgArr.length){
+							index = 0;
+						}*/
+					},1000);
+				}
+				btn2.onclick = function(){
+					/*
+					 * clearInterval()可以接收任意参数
+					 * 	如果参数是一个有效的定时器标识.则停止对应的定时器
+					 * 	如果参数不是一个有效的标识,则什么也不做
+					 */
+					clearInterval(timer);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<img id="img1" src="img/img1.jpg" />
+		<br />
+		<button id="btn1">Action</button>
+		<button id="btn2">Stop</button>
+	</body>
+</html>

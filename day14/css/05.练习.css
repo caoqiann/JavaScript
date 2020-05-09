@@ -1,0 +1,44 @@
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			#employeeTable tr td{
+				border: 1px solid;
+				
+				text-align: center;
+				
+				
+			}
+			#employeeTable tr th{
+				border: 1px solid;
+				
+				text-align: center;
+				
+				
+			}
+			#employeeTable{
+				border-collapse :collapse;
+				border: 1px solid;
+			}
+			#page{
+				width: 350px;
+				margin: 50px auto;
+				text-align: center;
+				
+			}
+			#addlist{
+				margin: 50px;
+				
+				width: 293px;
+			}
+			
+			#write{
+				margin: 70px;
+				height: 120px;
+				width: 230px;
+				border: 1px solid black;
+			}
+			h4{
+				float: left;
+			}
